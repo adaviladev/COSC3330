@@ -1,0 +1,81 @@
+Name			: Adrian Davila
+Course			: COSC 3330
+PeopleSoft ID	: 0837023
+Homework 6
+
+4.1.1
+	and rd, rs, rt
+	Reg[rd] = Reg[rs] AND Reg[rt]
+
+	RegWrite	1
+	MemRead		0
+	ALUMux		0
+	MemWrite	0
+	ALUop		AND - 010
+	RegMux		1
+	Branch		0
+
+4.1.2
+	Program Counter				= No
+	Instruction Memory			= No
+	Register Read Ports			= Yes
+	Main ALUop 					= Yes
+	Data Memory					= No
+	PC Adder					= No
+	Branch Adder 				= No
+		(The one for the PC)
+	Register Write Ports 		= Yes
+
+4.1.3
+	NotUsed		NoOutput	Resource
+	true					Program Counter
+				true		Instruction Memory
+				true		Register read Ports
+	true					Main ALU
+				true		Data Memory
+	true					PC Adder
+				true		Branch Adder
+								(The one for PC)
+				true		Register Write Port
+
+4.2.1
+	Program Counter				= no
+	Instruction Memory			= yes
+	Register Read Ports			= 
+									1. no
+									2. no
+									3. yes
+	Main ALUop 					= yes
+	Data Memory					= yes
+	PC Adder					= no
+	Branch Adder 				= no
+		(The one for the PC)
+	Register Write Ports 		= yes
+
+4.2.2
+	Both Read Register ports, instruction memory, ALU, Register Write port
+
+4.2.3
+	Third Read Register port, and second ALU for shifting
+
+4.3
+	Block			Latency(ps)	Cost
+	I-Mem			400			1000
+	Add 			100			30
+	Mux 			30			10
+	ALU 			120			100
+	Regs 			200			200
+	D-Mem			350			2000
+	Control			100			500
+
+	Proposed Replacement:
+	ALU w/ Mul		+300		+600
+
+4.3.1
+	400 + 200 + 30 + 120 + 350 + 100
+	Without	: 1200
+	With 	: 1500
+
+4.3.2
+	12/15 => .8
+	Decrease in performance

@@ -1,0 +1,124 @@
+Name			: Adrian Davila
+Course			: COSC 3330
+PeopleSoft ID	: 0837023
+Homework 4
+
+6. 	Multiply 9 x 14, convert to binary and write it as an unsigned binary integer here:
+	a.	
+		9 x 14 = 126
+		0111 1110
+
+		yes
+
+	b.	
+		0000 0000 0111 1110
+		1111 1111 1000 0010
+
+		no
+
+8.	
+	a.	
+		1011 0100
+			= 4
+			One character long
+
+	b.	
+		1011 0100
+			= -52
+
+	c.
+		1011 0100
+		0000 0000 0000 0000 0000 0100 1011
+
+		0000 0000 0000 0000 0000 0100 1100
+
+3.13
+	42 x 6 = 252 = 1111 1100
+	Iteration	Step							Multiplier	Multiplicand	Product
+	0 			Initial values (really)			0000 0110	0010 1010		0000 0000
+	1																		0101 0100
+				Shift left Multiplicand						0101 0100		
+				Shift right Multiplier			0000 0011
+	2																		1111 1100
+				Shift left Multiplicand						1010 1000
+				Shift right Multiplier			0000 0001
+
+	Answer	1111 1100 = 252
+
+3.14
+	Hardware
+	1a - 1 => product += multiplicand
+	2 - shift multiplicand left and multiplier right
+
+	Software
+	1a - 1 => product += multiplicand
+	2 - shift multiplicand left
+	3 - shift multiplier right
+
+	16bits * 2steps * 3t = 96
+
+	16bits * 3steps * 3t = 144
+
+
+3.15
+	n-adders * t-units = T
+
+3.16
+	T = log( n ) * 4t
+
+3.17
+	0x36 * 0x51
+	4374	= 	54 * 81
+	4374 	= 0001 0001 0001 0110 
+			= 0000 0000 0011 0110 * 0000 0000 0101 0001
+
+			= 	0000 0000 0011 0110 * 0000 0000 0101 0001
+			=		0000 0000 0101 0001
+
+				+	0000 1010 0010 0000
+				+	0000 0101 0001 0000 
+				+	0000 0001 0100 0100
+				+	0000 0000 1010 0010
+				=	0001 0001 0001 0110
+3.18 // TODO
+	45 / 17 = 2.647058824
+	10 1101 / 01 0001
+	Iteration	Step							Quotient	Divisor			Remainder
+	0 			Initial values (really)			000 000		010 001			001 011
+				Rem = Rem - Div 											
+	1											
+				Right Shift Divisor				
+				Rem = Rem - Div 				
+	2											
+				Right Shift Divisor			
+
+	Answer: 
+
+	001 011
+	010 001
+	111 010
+	000 110
+
+3.20
+	0000 1100 0000 0000 0000 0000 0000 0000
+	2's complement	: 201326592
+	Unsigned int 	: 201326592
+
+3.21 
+	0000 1100 0000 0000 0000 0000 0000 0000
+	000011 00000 00000 0000 0000 0000 0000
+	jal 0
+
+3.22 
+	0x6F000201
+	0110 1111 0000 0000 0000 0010 0000 0001
+	0 11011110 000 0000 0000 0010 0000 0001
+	Sign: +
+	Bias: 222 => 95
+	Int: 1000 0000 0000 0010 0000 0001
+	3.9616504E28
+
+3.23
+	118.125
+	0111 0110 . 001
+	0 1000 0101 110 1100 0100 0000 0000

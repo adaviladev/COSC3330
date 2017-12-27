@@ -1,0 +1,185 @@
+Name			: Adrian Davila
+Course			: COSC 3330
+PeopleSoft ID	: 0837023
+Homework 7
+
+4.8
+	4.8.1
+		Pipelined: 350ps;
+		Single-Cycled: 1250ps;
+
+	4.8.2
+		Pipelined: 1600ps;
+		Single-Cycled: 1100ps;
+
+	4.8.3
+		Choose the longest one: Instruction Decode (300ps -> x2(175ps))
+		New Clock Cyle Time: 300ps;
+
+	4.8.4
+		35% (Only used by LW and SW)
+
+	4.8.5
+		65% (Only used by ALU and LW)
+
+4.9
+	4.9.1
+		RAW on R1 from I1 to I2 and I3
+		WAR on R1 from I2 to I3
+		WAR on R2 from I1 to I2
+		RAW on R2 from I2 to I3
+		WAR on R1 from I2 to I3
+
+	4.9.2
+		Instruction 		Why the NOP?
+		Sequence
+
+		OR R1, R2, R3
+		NOP					R1 won't be writtenuntil stage 5 of I1
+		NOP					R1 won't be writtenuntil stage 5 of I1
+		OR R2, R1, R4
+		NOP					R2 won't be writtenuntil stage 5 of I2
+		NOP					R2 won't be writtenuntil stage 5 of I2
+		OR R1, R1, R2		
+
+	4.9.4
+		No forwarding				: (3 + 4) * 250	= 1750ps
+		With forwarding				: 3 * 300 		= 900 ps
+		Speedup due to forwarding	: 1750 / 900	= 1.94
+
+	4.9.5
+		Instruction 	ALU-ALU Forwarding?		Reg? Inst?
+		OR R1, R2, R3	No
+		OR R2, R1, R4	Yes						R1:I1
+		OR R1, R1, R2	Yes						R2:I2
+
+	4.9.6
+		No Forwarding 						: (3 + 4) * 250 = 1750
+		With ALU-ALU Forwarding 			: 3 * 290 		= 870
+		Speedup due to ALU-ALU Forwarding 	: 1750 / 870 	= 2.01
+
+4.10
+
+	IF 		ID 		EX 		MEM 	WB
+	200ps 	120ps 	150ps 	190ps 	100ps
+	4.10.1
+		SW R16,12(R6)		IF	ID 	EX	MEM	WB
+		LW R16,8(R6)		  	IF 	ID	EX	MEM	WB
+		BEQ R5,R4,Lbl				IF	ID	EX	MEM	WB
+		ADD R5,R1,R4							IF	ID	EX	MEM	WB
+		SLT R5,R15,R4								IF	ID	EX	MEM	WB
+
+							200		200		190		200		190		100
+								200		190		200		150		190
+
+		760 for one cycle
+		2010ps execution time.
+
+		11 cycles
+
+		No. The CPU cannot add any instructions once the instructions are received.
+
+	4.10.2
+
+	IF 		ID 		XM 		WB
+	200ps 	120ps 	190ps 	100ps
+
+		SW R16,R6		IF	ID 	XM	WB
+		LW R16,R6		  	IF 	ID	XM	WB
+		BEQ R5,R4,Lbl			IF	ID	XM	WB
+		ADD R5,R1,R4						IF	ID	XM	WB
+		SLT R5,R15,R4							IF	ID	XM	WB
+						200		200		190		200		190
+							200		190		200		190		100
+
+		Cycle Time: 1860
+
+		Instructions	Cycles	with	Cycles	with	 Speedup
+		Executed  		5	stages		4	stages
+
+		5				11				10				1.08
+
+	4.10.3
+
+	IF 		ID 		EX 		MEM 	WB
+	200ps 	120ps 	150ps 	190ps 	100ps
+
+		SW R16,12(R6)		IF	ID 	EX	MEM	WB
+		LW R16,8(R6)		  	IF 	ID	EX	MEM	WB
+		BEQ R5,R4,Lbl				IF	ID	EX	MEM	WB
+		ADD R5,R1,R4						IF	ID	EX	MEM	WB
+		SLT R5,R15,R4							IF	ID	EX	MEM	WB
+							200		200		200		150		190
+								200		190		200		190		100
+		Cycle Time: 1820
+
+
+		#Inst 		#Branch		Cycles with		Cycles with		Speedup
+		Executed	Executed	Branch in EX 	Branch in ID
+
+		5			1			11				10				1.10
+
+	4.10.4
+
+	IF 		ID 		XM 		WB
+	200ps 	120ps 	210ps 	100ps
+
+		SW R16,R6		IF	ID 	XM	WB
+		LW R16,R6		  	IF 	ID	XM	WB
+		BEQ R5,R4,Lbl			IF	ID	XM	WB
+		ADD R5,R1,R4						IF	ID	XM	WB
+		SLT R5,R15,R4							IF	ID	XM	WB
+						200		210		210		200		210
+							200		210		200		210		100
+
+		Cycle Time: 1950
+
+		Cycles with		Cycles with		Speedup
+		5 stages		4 stages
+		11				10				1.03
+
+	4.10.5
+
+	IF 		ID 		EX 		MEM 	WB
+	200ps 	180ps 	140ps 	190ps 	100ps
+
+		SW R16,12(R6)		IF	ID 	EX	MEM	WB
+		LW R16,8(R6)		  	IF 	ID	EX	MEM	WB
+		BEQ R5,R4,Lbl				IF	ID	EX	MEM	WB
+		ADD R5,R1,R4						IF	ID	EX	MEM	WB
+		SLT R5,R15,R4							IF	ID	EX	MEM	WB
+							200		200		200		180		190
+								200		190		200		190		100
+		Cycle Time: 1850
+
+
+		New Id 		New EX		New Cycle	Old Cycle		Speedup
+		Latency		Latency		Time 	 	Time
+
+		180			140			1850		1820			0.98
+
+	4.10.6
+
+	IF 		ID 		EX 		MEM 	WB
+	200ps 	120ps 	130ps 	190ps 	100ps
+
+		SW R16,12(R6)		IF	ID 	EX	MEM	WB
+		LW R16,8(R6)		  	IF 	ID	EX	MEM	WB
+		BEQ R5,R4,Lbl				IF	ID	EX	MEM	WB
+		ADD R5,R1,R4								IF	ID	EX	MEM	WB
+		SLT R5,R15,R4									IF	ID	EX	MEM	WB
+
+							200		200		190		200		130		190
+								200		190		190		200		190		100
+							
+
+		760 for one cycle
+		2010ps execution time.
+
+		Cycles with Branch in EX: 11
+			Execution time 		: 2010ps
+
+		Cycles with Branch in MEM: 12
+			Execution time: 2180
+
+		Speedup: 0.92
